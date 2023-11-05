@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API-QUIZ2</title>
+</head>
+<body>
+    {% if create %}
+        <div>Data inserted succefully</div>
+    {% endif %}
+    <form method="post" action="{% url 'index' %}">
+        {% csrf_token %}
+        <h1>Search here!</h1>
+        {{form.as_p}}
+        <input type="submit" value="search" />
+    </form>
+    <div class="main">
+        <div class="wrapper title">
+            <div class="id">id</div>
+            <div>reg no.</div>
+            <div>Subject</div>
+            <div>marks</div>
+        </div>
+        {% if std_content %}
+            {% for i in std_content %}
+                <div class="wrapper title">
+                    <div class="id">{{forloop.counter}}</div>
+                    <div>{{i.regno}}</div>
+                    <div>{{i.somo}}</div>
+                    <div>{{i.alama}}</div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <style>
+        body{
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+        }
+        form p{
+            display: flex;
+            flex-direction: column;
+        }
+        form p label{
+            padding: 5px;
+        }
+        form input{
+            padding: 7px;
+        }
+        form input[type="text"]{
+            width: 100%;
+            margin-bottom: 10px;
+            outline: none;
+        }
+        form input[type="submit"]{
+            background-color: rgb(16, 16, 19);
+            border: none;
+            color: white;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        .title{
+            background-color: rgb(236, 236, 236);
+            padding: 10px;
+        }
+        .main{
+            display: flex;
+            flex-direction: column;
+            width: 80%;
+        }
+        .wrapper div{
+            width: 30%;
+        }
+        .wrapper{
+            display: flex;
+            flex-direction: row;
+            margin: 5px;
+        }
+        div.id{
+            width: 5%;
+        }
+        h1{
+            padding: 5px;
+            columns: rgb(236, 236, 236);
+        }
+    </style>
+</body>
+</html>
